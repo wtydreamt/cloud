@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>行云科技</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/css/hui.css" />
+<style type="text/css">
+.hui-form-items{padding:10px;position:relative;margin-bottom:1px;border-radius:4px;background:#fff}#rz_submit{display:block;margin:30px auto}.edc_con{width:93%;margin:15px auto}.edc_con p{color:#a3a3a3;padding-top:10px;padding-bottom:10px}.sc_com{border:1px solid #d9d9dc;height:200px;position:relative}.sc_img img{width:25%;height:25%;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto}.sc_ip{border:1px solid #d9d9dc;height:200px;position:absolute;background:#ccc;-webkit-opacity:0;-moz-opacity:0;-khtml-opacity:0;opacity:0;filter:alpha(opacity=0);-ms-filter:"alpha(opacity=0)";filter:alpha(opacity=0)}.sc_img .sc_zm1,.sc_img .sc_zm2{width:100%;height:100%;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;background:#fff;display:none}
+.jh .hui-input{height:40px;line-height:22px;float:left;width:62%;border:0;padding-left:6px;-webkit-appearance:none;-moz-appearance:none;appearance:none;border-radius:0;border:0;background:#fff;border:1px solid #ccc}.jh{margin-top:50px}.hui-bl{background:#023a95!important;color:#fff!important}.hui-c{background:#bfbfbf!important;color:#fff!important}.hui-header .show,.hui-wrap show{opacity:1;transform:scale(1);-moz-transform:scale(1);-webkit-transform:scale(1);z-index:30}.jh .kl-frspn{width:29%;line-height:40px;text-align:right;padding-right:2%}.load{width:100%;height:100%;background:#023a95;position:fixed;left:0;top:0;z-index:99999}.zzsc2{width:80px;height:80px;background-color:#fff;position:relative;top:50%;margin:0 auto;margin-top:-40px;-webkit-animation:rotateplane 1.2s infinite ease-in-out;animation:rotateplane 1.2s infinite ease-in-out}@-webkit-keyframes rotateplane{0%{-webkit-transform:perspective(140px)}50%{-webkit-transform:perspective(140px) rotateY(180deg)}100%{-webkit-transform:perspective(140px) rotateY(180deg) rotateX(180deg)}}@keyframes rotateplane{0%{transform:perspective(140px) rotateX(0) rotateY(0);-webkit-transform:perspective(140px) rotateX(0) rotateY(0)}50%{transform:perspective(140px) rotateX(-180.1deg) rotateY(0);-webkit-transform:perspective(140px) rotateX(-180.1deg) rotateY(0)}100%{transform:perspective(140px) rotateX(-180deg) rotateY(-179.9deg);-webkit-transform:perspective(140px) rotateX(-180deg) rotateY(-179.9deg)}}
+</style>
+</head>
+<body>
+<div class="load" id="load">
+ 	<div class="zzsc2"></div>
+</div>
+<header class="hui-header">
+	<h1>产品激活</h1>
+</header> 
+<div class="hui-wrap">
+<form action="" method="post" class="jh">
+	<div class="hui-form-items">
+			<span class="kl-frspn" >激活序号  :  </span><input type="text" class="hui-input hui-input-clear wide-xs4 hi_xlh"  placeholder="32位" >
+		</div>
+	<div class="hui-form-items">
+			<span class="kl-frspn" >您的姓名  :  </span><input type="text" class="hui-input hui-input-clear wide-xs4 hi_name" >
+	</div>
+	<div class="hui-form-items">
+			<span class="kl-frspn" >您的院校  :  </span><input type="text" class="hui-input hui-input-clear wide-xs4 hi_school" >
+	</div>
+	<div class="hui-form-items">
+			<span class="kl-frspn" >微信号码  :  </span><input type="text" class="hui-input hui-input-clear wide-xs4 hi_wc" >
+	</div>
+	<button type="button" class="hui-button  hui-c" id="rz_submit">提交审核</button>
+</form>
+</div>
+<script type="text/javascript" src="__PUBLIC__/static/js/hui.js"></script>
+<script>
+window.onload = function(){
+	document.body.removeChild(document.querySelector('#load'));
+}
+
+  hui("#rz_submit").click(function(){
+	var hi_xlh = hui('.hi_xlh').val();
+	var hi_name = hui('.hi_name').val();
+	var hi_school = hui('.hi_school').val();
+	var hi_wc = hui('.hi_wc').val();
+	 if(hi_xlh==0){
+		hui.iconToast('序列号不能为空！', 'error');
+		return false;
+	}else if(hi_name==0){
+		hui.iconToast('姓名不能为空！', 'error');
+		return false;
+	}else if(hi_school==0){
+		hui.iconToast('学校名字不能为空！', 'error');
+		return false;
+	}else if(hi_wc==0){
+		hui.iconToast('微信号不能为空！', 'error');
+		return false;
+	}else{
+		
+		var URL="" ;
+		 hui.post(
+		   'url',
+		  {xlh:hi_xlh, name:hi_name,school:hhi_school,wx:hi_wc},
+		  function(msg){
+		     hui.iconToast('操作成功', 'success')
+		  },
+		  function(e){
+		      hui.iconToast('信息提交失败请稍后再试！', 'warn')
+		  })
+	};
+
+})
+
+</script>
+</body>
+</html>
