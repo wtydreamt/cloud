@@ -185,9 +185,9 @@ class ProductController extends Controller {
 // 密文 $str=md5($sn.$key);
 // ADLABN508846BB8E3EDC3DC80F1778CA7F9DA3
 
-http://www.test.com/Product/LoginLog   登录行为数据存储请求
-请求方式 post
-请求参数 number 序列号
-         ltime  登录时间
-         wechat 微信号
-参数格式 json
+// http://www.test.com/Product/LoginLog   登录行为数据存储请求
+// 请求方式 post
+// 请求参数 number 序列号
+//          ltime  登录时间
+//          wechat 微信号
+// 参数格式 json
