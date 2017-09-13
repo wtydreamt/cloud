@@ -58,7 +58,12 @@ $(function(){
 				var number=number.replace(/\s+/g, "");
 				var length=number.length;
 				var n=length/38;
-				alert(n);
+				if(n=="10"){
+					alert("已录入10个序列号");
+				}
+				if(n=="20"){
+					alert("已录入20个序列号");
+				}
            }
 		
 	})
