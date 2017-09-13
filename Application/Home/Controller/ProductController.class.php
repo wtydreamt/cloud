@@ -103,7 +103,11 @@ class ProductController extends Controller {
             $arr[]=array("number"=>$n,"product"=>$data['product'],"school"=>$data['school'],"order"=>$data['order'],"deliver_time"=>$time);
         }
         $res=M("product")->addAll($arr);
-        print_r($res);
+        if($res){
+            echo "录入成功";
+        }else{
+            echo "录入失败";
+        }
     }
   }
 // http://www.x-cloud.cc/Prouduct/Reg?SN=ADLabN+32位Md5码
