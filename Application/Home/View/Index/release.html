@@ -20,13 +20,13 @@
 <div class="hui-wrap">
 <form action="{:U(login)}" method="post" class="jh">
     <div class="hui-form-items">
-            <span class="kl-frspn" >产品名  :  </span><input type="text" name="user" class="hui-input hui-input-clear wide-xs4 hi_wc" >
+            <span class="kl-frspn" >产品名  :  </span><input type="text" id="product"  name="product" class="hui-input hui-input-clear wide-xs4 hi_wc" >
     </div>
     <div class="hui-form-items">
-            <span class="kl-frspn" >用户&nbsp&nbsp  :  </span><input type="text" name="user" class="hui-input hui-input-clear wide-xs4 hi_wc" >
+            <span class="kl-frspn" >用户&nbsp&nbsp  :  </span><input id="school" type="text" name="school" class="hui-input hui-input-clear wide-xs4 hi_wc" >
     </div>  
     <div class="hui-form-items">
-            <span class="kl-frspn" >订单号  :  </span><input type="text" name="user" class="hui-input hui-input-clear wide-xs4 hi_wc" >
+            <span class="kl-frspn" >订单号  :  </span><input type="text" id="order" name="order" class="hui-input hui-input-clear wide-xs4 hi_wc" >
     </div>      
     <div class="hui-form-items">
             <span class="kl-frspn" >序列号  :  </span><textarea name="" id="number" cols="143" rows="50"></textarea>
@@ -42,8 +42,12 @@
 $(function(){
 	$("#rz_submit").click(function(){
 		var number=$("#number").val();
-		var send={serial:"jfsdkjflasd",hour:"2017",wechat:"weixin"}
-		var url="{:U('Product/LoginLog')}";
+		// var number=number.replace(/\s+/g, ",");
+		var product=$("#product").val();
+		var order=$("#order").val();
+		var school=$("#school").val();
+		var send={school:school,order:order,product:product,number:number}
+		var url="{:U('Product/ProductAdd')}";
 		$.post(url,send,function(msg){
 			alert(msg)
 		})
