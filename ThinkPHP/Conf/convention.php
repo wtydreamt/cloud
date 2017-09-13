@@ -151,7 +151,6 @@ return  array(
         "Product/release"=>"Index/index",
         "login"=>"Index/login",
         "log"=>"Product/LoginLog",
-        "Product"=>"Product/ProductAdd",
     ), // 默认路由规则 针对模块
     'URL_MAP_RULES'         =>  array(), // URL映射定义规则
 

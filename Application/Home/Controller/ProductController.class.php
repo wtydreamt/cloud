@@ -93,14 +93,13 @@ class ProductController extends Controller {
         #M("login_log")->add();
         # print_r($arr);
     }
-
     public function ProductAdd(){
         $data=I();
         $number=explode("\n",$data['number']);
-        $time=date("Y/m/d");
+        // $time=date("Y/m/d");
         $arr=array();
         foreach($number as $k=>$n){
-            $arr[]=array("number"=>$n,"product"=>$data['product'],"school"=>$data['school'],"order"=>$data['order'],"deliver_time"=>$time);
+            $arr[]=array("number"=>$n,"product"=>$data['product'],"school"=>$data['school'],"order"=>$data['order'],"deliver_time"=>$data['deliver_time']);
         }
         $res=M("product")->addAll($arr);
         if($res){
