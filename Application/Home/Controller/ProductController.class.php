@@ -87,11 +87,76 @@ class ProductController extends Controller {
             }
         }
     }
-
+/**
+ * 检测请求方式 
+ * @param request 请求方式错误信息 类型 string  true 是成功  其他为错误信息
+ * @param method  接口请求方式     POST string
+ * @param status  数据存储状态     类型 string  true 成功 false 失败
+ */
     public function LoginLog(){
-        #$data=I();
-        #M("login_log")->add();
-        # print_r($arr);
+        header('Content-type:text/html;charset=utf-8');
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+                    $data=I();
+                    $message=array();
+                    $res_data=$this->testing($data);
+                    if(empty($res_data['data'])){
+                                    $message['request']="true";
+                                    $message['method'] ="POST";
+                                    $message['status'] ="fasle";
+                                    $message['param']  ="false";
+                                    $message['error']  ="空的请求参数";
+                    }else if(!empty($res_data['error'])){
+                                    $message['request']="true";
+                                    $message['method'] ="POST";
+                                    $message['status'] ="fasle";
+                                    $message['param']  ="false";
+                                    $message['error']  ="错误的请求参数:".implode("、",$res_data['error']);                         
+                    }else{
+                        $res=M("login_log")->add($res_data['data']);
+                        if($res){
+                            $message['request']="true";
+                            $message['method'] ="POST";
+                            $message['status'] ="true";
+                            $message['param']  ="true";
+                            $message['error']  ="0";
+                        }else{
+                            $message['request']="true";
+                            $message['method'] ="POST";
+                            $message['status'] ="false";
+                            $message['param']  ="true";
+                            $message['error']  ="网络繁忙稍后再试";                
+                        }                        
+                    }           
+
+            }else{
+                        $message['request']="false";
+                        $message['method'] ="POST";
+                        $message['status'] ="false";
+                        $message['param']  ="";
+                        $message['error']  ="错误的请求类型";
+            }                        
+
+        echo json_encode($message);
+
+    }
+    public function testing($data){
+        $arr=array();
+        $error=array();
+        foreach($data as $key=>$val){
+            switch($key) {
+                case 'number'     :   
+                      $arr['l_number']=$val;break;
+                case 'ltime'      :   
+                      $arr['l_time']=$val;break;  
+                case 'wechat'     :   
+                      $arr['l_wei']=$val;break;  
+                default:
+                      $error[]=$key;
+            }            
+        }
+        $res["data"]=$arr;
+        $res["error"]=$error;
+        return $res;
     }
     public function ProductAdd(){
         $data=I();
@@ -119,3 +184,10 @@ class ProductController extends Controller {
 // $sn ="序列号";
 // 密文 $str=md5($sn.$key);
 // ADLABN508846BB8E3EDC3DC80F1778CA7F9DA3
+
+http://www.test.com/Product/LoginLog   登录行为数据存储请求
+请求方式 post
+请求参数 number 序列号
+         ltime  登录时间
+         wechat 微信号
+参数格式 json
