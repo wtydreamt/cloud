@@ -20,8 +20,19 @@
 <div class="hui-wrap">
 <form action="{:U(login)}" method="post" class="jh">
     <div class="hui-form-items">
-            <span class="kl-frspn" >产品名  :  </span><input type="text" id="product"  name="product" class="hui-input hui-input-clear wide-xs4 hi_wc" >
+            <span class="kl-frspn" >产品名  :  </span>
+            <select name="" id="product"  name="product" class="hui-input hui-input-clear wide-xs4 hi_wc">
+            <option value="0" selected>选折产品名</option>
+            <foreach name="product" item="v">
+            <option value="{$v.name}">{$v.name}</option>
+            </foreach>
+            </select> <input type="button" value="添加新产品" class="hui-input hui-input-clear wide-xs4" id="addxin" style="width:100px">
     </div>
+    <div class="hui-form-items" id="xin" style="display:none">
+            <span class="kl-frspn" >新产品  :  </span><input  id="xinproduct" class="hui-input hui-input-clear wide-xs4 hi_wc" >
+            <input type="button" id="que" value="确定" class="hui-input hui-input-clear wide-xs4" style="width:50px">
+            <input type="button" id="cancel" value="取消" class="hui-input hui-input-clear wide-xs4" style="width:50px">
+    </div>    
     <div class="hui-form-items">
             <span class="kl-frspn" >用户&nbsp&nbsp  :  </span><input id="school" type="text" name="school" class="hui-input hui-input-clear wide-xs4 hi_wc" >
     </div>  
@@ -42,12 +53,16 @@
 <script src="__PUBLIC__/static/js/jquery-2.0.3.min.js"></script>
 <script>
 $(function(){
+	//
 	$("#rz_submit").click(function(){
 		var n=count_number();
+		var product=$('#product option:selected').val();
+		if(product=="0"){
+			alert("请选择产品名");
+			return false;
+		}
 		if(confirm("录入总数："+n+"个")){
 			var number=$("#number").val();
-			// var number=number.replace(/\s+/g, ",");
-			var product=$("#product").val();
 			var time=$("#time").val();
 			var order=$("#order").val();
 			var school=$("#school").val();
@@ -61,14 +76,25 @@ $(function(){
 		}
 
 	})
-	// $("#number").keydown(function(e){
-	// 	   if (e.keyCode == 13) {  
-	// 			var number=$("#number").val();
-	// 			var number=number.replace(/\s+/g, "");
-	// 			var length=number.length;
-	// 			var n=length/38;				
- //           }
-	// })
+
+	$("#addxin").click(function(){
+		$("#xin").show();
+	})
+	$("#cancel").click(function(){
+		$("#xin").hide();
+	})
+	$("#que").click(function(){
+		    var xinproduct=$("#xinproduct").val();
+		    var send={name:xinproduct}
+			var url="{:U('Index/addproduct')}";
+			$.post(url,send,function(msg){
+				alert(msg);
+				if(msg=="ok"){
+					location.reload();
+				}
+			})
+	})
+
 })
 function count_number(){
 	var number=$("#number").val();
@@ -77,4 +103,13 @@ function count_number(){
 	var n=length/38;
 	return n;	
 }
+	//////////////////////////////////////////////////
+	// $("#number").keydown(function(e){
+	// 	   if (e.keyCode == 13) {  
+	// 			var number=$("#number").val();
+	// 			var number=number.replace(/\s+/g, "");
+	// 			var length=number.length;
+	// 			var n=length/38;				
+ 	//         }
+	// })
 </script>
