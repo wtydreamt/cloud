@@ -21,25 +21,25 @@ class IndexController extends Controller {
     }
 
     public function login(){
-            $host=$_SERVER['SERVER_NAME'];
+            header('Content-type:text/html;charset=utf-8');
     		$data=I();
     		$user=trim($data['user']);
     		$pwd =trim($data['pwd']);
     		if($user!=$this->logininfo['name']){
     			echo "<script>
     			alert('登录名不正确');
-    			window.location.href=".$host."
+    			window.location.href='http://test.x-cloud.cc/'
     			</script>";die;
     		}    		
     		if(md5($pwd)!=$this->logininfo['pwd']){
     			echo "<script>
     			alert('密码不正确');
-    			window.location.href=".$host."
+    			window.location.href='http://test.x-cloud.cc/'
     			</script>";die;
     		}
     		cookie("admin",$user);
     		echo "<script>
-    			window.location.href=".$host."
+    			window.location.href='http://test.x-cloud.cc/'
     			</script>";
     }
 
